@@ -21,12 +21,7 @@ def make_call():
     if not to_number:
         return jsonify({'error': 'no number provided'}), 400
 
-    twiml = """<Response>
-  <Say voice="Polly.Joanna">
-    Hey! This is your Fluent English coach.
-    Ready to practice? Tell me what you worked on today at work. Go ahead!
-  </Say>
-</Response>"""
+    twiml = """<Response><Say voice="Polly.Joanna">Hey! This is your Fluent English coach. Ready to practice? Tell me what you worked on today at work. Go ahead!</Say></Response>"""
 
     try:
         client = Client(TWILIO_SID, TWILIO_TOKEN)
@@ -38,7 +33,3 @@ def make_call():
         return jsonify({'success': True, 'sid': call.sid})
     except Exception as ex:
         return jsonify({'error': str(ex)}), 500
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port)
